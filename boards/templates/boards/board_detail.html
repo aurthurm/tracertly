@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h3>Board: {{ board_detail.name }}</h3>
+	<hr>
+	<p class="lead text-muted">{{ board_detail.description }}</p>
+	<hr>
+	<div class="card-columns">
+		{% for listing in board_listings %}
+			<div class="card">
+				<div class="card-body">
+				    <h5 class="card-title">{{ listing.name }}</h5>
+				    <hr>
+				    {% for task in listing.item_listings.all %}
+						<div class="card-body">
+							<p class="card-text">
+								{{ task.name }}
+								<span class="cardTextMore">
+									<a href="#">
+										<i class="far fa-edit"></i>
+									</a>
+									<a href="#task{{task.pk}}" class="item-modal" data-toggle="modal" data-target="#task{{task.pk}}">
+										<i class="fas fa-expand-arrows-alt"></i>
+									</a>
+								</span>
+							</p>
+						</div>
+
+						<!-- Item Modal -->
+						<div class="modal fade" id="task{{task.pk}}" tabindex="-1" role="dialog" aria-labelledby="task{{task.pk}}Title" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" style="max-width: 75% !important;" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="task{{task.pk}}LongTitle">
+											{{ task.name }}
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body card">
+										<div class="row">
+											<div class="col-10">
+												<div class="row">
+													<div class="col-1">
+														<i class="fas fa-align-right faSize-bg"></i>
+													</div>
+													<div class="col-11">
+														<h6>Description: <a href="#"><i class="fas fa-pencil-alt faSize-bg"></i></a></h6>
+														<hr>
+														<div class="card-subtitle">
+															{{ task.decsription }}
+														</div>
+														<hr>
+													</div>
+													<div class="col-1">
+														<i class="fas fa-tasks  faSize-bg"></i>
+													</div>
+													<div class="col-11">
+														<h6>MILESTONES</h6>
+														<hr>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+															<label class="form-check-label" for="inlineCheckbox1">Task 1</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+															<label class="form-check-label" for="inlineCheckbox2">Task 2</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+															<label class="form-check-label" for="inlineCheckbox3">Some Assignment</label>
+														</div>
+														<hr>
+													</div>
+													<div class="col-1">
+														<i class="far fa-comment faSize-bg"></i>
+													</div>
+													<div class="col-11">
+														<h6>Comment:</h6>
+														<form action="#">
+															<div class="row">
+																<div class="col-10">
+																	<textarea class="form-control" id="task{{task.pk}}Textarea1" rows="3"></textarea>		      							
+																</div>
+																<div class="col-2">
+																	<a type="button" type="submit" style="margin-top: 60%" class="btn btn-info">Commit</a>
+																</div>
+															</div>		      						
+														</form>
+														<hr>
+														<h6>Comments:</h6>
+														<hr>
+														<div class="row">
+															<div class="col-2 commentor" style="margin-bottom: 1rem;">
+																<h6>Aurthur</h6>
+															</div>
+															<div class="col-10 comment" style="margin-bottom: 1rem;">
+																Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium esse reprehenderit ipsam consectetur velit quia aspernatur laboriosam repellat.
+															</div>
+															<div class="col-2 commentor" style="margin-bottom: 0.5rem;">
+																<h6>Casten</h6>
+															</div>
+															<div class="col-10 comment" style="margin-bottom: 0.5rem; border-top: 1px solid #ccc;">
+																Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia consequuntur excepturi itaque odit harum modi accusantium voluptatem. Odit rerum consectetur est vero culpa sapiente explicabo quibusdam earum dolor, quae doloribus?
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-2">
+												<h5>ADD +</h5>
+												<hr>
+												<div class="btn-group-vertical btn-group-sm">
+													<a href="" class="btn btn-success"><i class="fas fa-user"></i> MEMBER</a>
+													<a href="" class="btn btn-success"><i class="fas fa-users"></i> TEAM</a>
+													<a href="" class="btn btn-success"><i class="fas fa-tasks"></i> MILESTONES</a>
+												</div>
+												<hr>
+												<!-- move item to a different card  -->
+												<a href="" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Move Item</a>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Save changes</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Item Modal -->
+
+				    {% endfor %}
+				    <a href="#" class="card-link">+ add item</a>
+				</div>
+			</div>
+		{% endfor %}
+{% endblock %}

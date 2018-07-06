@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+	<h3>{{ heading }}</h3>
+	<hr>
+	<div class="card-columns">
+		{% for board in boards %}	
+			<!-- Board -->	
+			<div class="card">
+				<div class="card-body">
+				    <h5 class="card-title"> 
+				    	<a href="{% url 'boards:board-detail' pk=board.pk %}" class="card-link text-center">{{ board.name }}</a>
+				    </h5>
+				    <hr>
+					  <div class="card-body">
+					    <p class="card-text">
+					    	{{ board.description }}
+					    	<span class="cardTextMore">
+					    		<a href="#">
+					    			<i class="far fa-edit"></i>
+					    		</a>
+					    	</span>
+					    </p>
+					</div>
+					<hr>		   
+				</div>
+			</div>
+			<!-- / Board -->
+		{% endfor %}
+	</div>
+
+{% endblock %}
+
+
+

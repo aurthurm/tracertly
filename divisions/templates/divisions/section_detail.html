@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="container">
+		<h2>Section: {{ section_detail.name }}</h2>
+			<nav style="margin-bottom: 2rem;">
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Sub Sections</a>
+					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Boards</a>
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<!-- Sub Sections -->
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+					<div class="card-columns">
+						{% for sect in sub_sections %}	
+							<!-- Board -->	
+							<div class="card">
+								<div class="card-body">
+								    <h5 class="card-title"> 
+								    	<a href="{% url 'divisions:subsection-detail' pk=sect.pk %}" class="card-link text-center">{{ sect.name }}</a>
+								    </h5>
+							<!-- 	  <hr>
+									  <div class="card-body">
+									    <p class="card-text">
+									    	{{ board.description }}
+									    	<span class="cardTextMore">
+									    		<a href="#">
+									    			<i class="far fa-edit"></i>
+									    		</a>
+									    	</span>
+									    </p>
+									</div>
+									<hr> -->		   
+								</div>
+							</div>
+							<!-- / Board -->
+						{% endfor %}
+					</div>
+				</div>
+				<!-- Boards -->
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+					<div class="card-columns">
+						{% for board in section_detail.board_sections.all %}	
+							<!-- Board -->	
+							<div class="card">
+								<div class="card-body">
+								    <h5 class="card-title"> 
+								    	<a href="{% url 'boards:board-detail' pk=board.pk %}" class="card-link text-center">{{ board.name }}</a>
+								    </h5>
+								  <hr>
+									  <div class="card-body">
+									    <p class="card-text">
+									    	{{ board.description }}
+									    	<span class="cardTextMore">
+									    		<a href="#">
+									    			<i class="far fa-edit"></i>
+									    		</a>
+									    	</span>
+									    </p>
+									</div>
+									<hr>		   
+								</div>
+							</div>
+							<!-- / Board -->
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+	</div>
+{% endblock %}

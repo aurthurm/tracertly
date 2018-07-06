@@ -1,0 +1,96 @@
+ /* 
+    ::::::::::::::::::::::::: Base Styles
+ */
+
+
+  /* 
+    ::::::::::::::::::::::::: Off Canvas Menu
+ */
+.sidenav {
+    height: 100%; 
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 50px;
+    transition: 0.5s; 
+}
+
+.sidenav a {
+    text-decoration: none;
+    color: #818181;
+    transition: 0.3s;
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.sidenav a.closebtn,
+.sidenav a.closebtn:hover {
+    color: rgb(255,0,0) !important;
+}
+
+.sidenav a b,
+.sidenav a b:hover {
+    color: rgb(0,0,0) !important;
+}
+
+
+#main {
+    transition: margin-left .5s;
+    margin-top: 80px;
+    margin-left: 0;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+} 
+
+/* 
+    ::::::::::::::::::::::::: Cards
+*/
+
+
+ .faSize-bg {
+     float: right;
+     font-size: 1.25rem
+ }
+
+/* body .main-content .card-columns {
+     -webkit-column-count: 3;
+     column-count: 3;
+ }*/
+ 
+.card {
+     background: #ebebeb!important;
+ }
+ 
+ .card-body {
+     padding: .25rem;
+ }
+ 
+.card-text {
+     background: #fff;
+     padding: .25em
+ }
+ 
+.card-text .cardTextMore {
+     float: right;
+     background: #ccc;
+     padding: .25em
+ }
+
+ /* 
+    ::::::::::::::::::::::::: Fontawesome
+*/
+
+
+ .faSize-bg {
+     float: right;
+     font-size: 1.25rem
+ }

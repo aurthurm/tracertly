@@ -1,0 +1,86 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tracertly</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">    <!-- faontawesome js-->
+    <script src="{% static 'fontawesome/js/fontawesome-all.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fontawesome/css/fa-svg-with-js.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tracertly.css' %}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#" onclick="openNav()">Tracertly</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Disabled</a>
+          </li>
+        </ul>
+       <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" hidden>Search</button>
+        </form>
+      </div>
+    </nav>
+    
+    <div class="wrapper">
+        <nav id="sideBarNav" class="sidenav">
+            <ul class="list-group">
+                <a  href="{% url 'home' %}" class="list-group-item d-flex justify-content-center align-items-center ">
+                    <b>DASHBOARD</b>
+                    </a>
+                <a  href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    Boards
+                    <span class="badge badge-primary badge-pill">9</span></a>
+                <a  href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    Sections
+                    <span class="badge badge-primary badge-pill">2</span></a>
+                <a  href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    Teams
+                    <span class="badge badge-primary badge-pill">5</span></a>
+                <a  href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    More
+                    <span class="badge badge-primary badge-pill">14</span>
+                </a>
+                <a  href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    etc
+                    <span class="badge badge-primary badge-pill">144</span>
+                </a>
+                <a  href="javascript:void(0)" class="list-group-item d-flex justify-content-center align-items-center closebtn" onclick="closeNav()">
+                   <<- X </a>
+            </ul>
+        </nav>
+
+        <main role="main" id="main" class="container">
+              
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <!-- tracertly js -->
+    <script src="{% static 'js/vue.min.js' %}"></script>
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/tracertly.js' %}"></script>
+    {% block scripts %} {% endblock %}
+</body>
+</html>
