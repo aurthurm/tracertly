@@ -54,3 +54,6 @@ class Milestone(models.Model):
 
 	def __str__(self):
 		return self.title
+	
+	def get_absolute_url(self):
+		return reverse('boards:item-detail', kwargs={'board_id': self.item.Listing.board.pk, 'listing_id': self.item.Listing.pk, 'item_id': self.item.pk})

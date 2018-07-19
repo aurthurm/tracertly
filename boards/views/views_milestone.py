@@ -13,8 +13,8 @@ class MilestoneCreate(LoginRequiredMixin, CreateView):
 
 	def form_valid(self, form):
 		form.instance.creator = self.request.user
-		listing = get_object_or_404(Listing, pk=self.kwargs.get('listing_id'))
-		form.instance.Listing = listing
+		item = get_object_or_404(Item, pk=self.kwargs.get('item_id'))
+		form.instance.item = item
 		return super().form_valid(form)
 
 class MilestoneUpdate(UpdateView):

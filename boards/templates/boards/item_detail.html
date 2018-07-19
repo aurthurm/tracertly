@@ -30,18 +30,13 @@
 							<div class="col-11">
 								<h6>MILESTONES</h6>
 								<hr>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-									<label class="form-check-label" for="inlineCheckbox1">Task 1</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-									<label class="form-check-label" for="inlineCheckbox2">Task 2</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-									<label class="form-check-label" for="inlineCheckbox3">Some Assignment</label>
-								</div>
+								{% for measure in milestones %}
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" id="{{ measure.title }}" value="{{ measure.pk }}">
+										<label class="form-check-label" for="{{ measure.title }}">{{ measure.title }}</label>
+									</div>
+									<!-- <i class="fas fa-check-circle"></i> <i class="fas fa-times-circle"></i> -->
+								{% endfor %}
 								<hr>
 							</div>
 							<div class="col-1">
