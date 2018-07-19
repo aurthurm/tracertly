@@ -50,6 +50,7 @@ class Milestone(models.Model):
 	title = models.CharField(max_length=30, default='MileStone Title')
 	status = models.BooleanField(default=False)
 	item = models.ForeignKey(Item, on_delete=models.PROTECT)
+	creator = models.ForeignKey('auth.User', on_delete = models.PROTECT)
 
 	def __str__(self):
 		return self.title

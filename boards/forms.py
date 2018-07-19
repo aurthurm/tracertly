@@ -8,4 +8,3 @@ class ListingForm(forms.ModelForm):
         # fields = '__all__'
         fields = ['name', 'description']
         widgets = { 'description': TinyMCE(attrs={'cols': 80, 'rows': 30}) }
-
