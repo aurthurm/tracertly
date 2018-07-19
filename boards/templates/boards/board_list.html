@@ -10,7 +10,7 @@
 			<div class="card">
 				<div class="card-body">
 				    <h5 class="card-title"> 
-				    	<a href="{% url 'boards:board-detail' pk=board.pk %}" class="card-link text-center">{{ board.name }}</a>
+				    	<a href="{% url 'boards:board-detail' board_id=board.pk %}" class="card-link text-center">{{ board.name }}</a>
 				    </h5>
 				    <hr>
 					  <div class="card-body">
@@ -28,6 +28,15 @@
 			</div>
 			<!-- / Board -->
 		{% endfor %}
+
+		<div class="card-body">
+			<p class="card-text">
+				<a href="{% url 'boards:board-add' %}">Create Board</a>
+			</p>
+		</div>
+
+
+
 	</div>
 	
 {% endblock %}

@@ -1,6 +1,6 @@
-from rest_framework import routers
-from boards.api.viewsets import BoardViewSet
+# from rest_framework import routers
+# from boards.api.viewsets import BoardViewSet
 
-router = routers.DefaultRouter()
+# router = routers.DefaultRouter()
 
-router.register(r'board', BoardViewSet)
+# router.register(r'board', BoardViewSet)

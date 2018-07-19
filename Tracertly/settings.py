@@ -37,7 +37,8 @@ TRACERTLY_APPS = [  # Local Apps that are developed withing Tracertly
 ]
 
 EXTENSION_APPS = [# Apps that are installed to add functionality to Tracerly :> Packages
-    'rest_framework',
+    # 'rest_framework',
+    'tinymce',
 ]
 
 INSTALLED_APPS = [
@@ -53,7 +54,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
 
@@ -143,3 +144,13 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True

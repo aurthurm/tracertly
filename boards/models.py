@@ -1,15 +1,19 @@
 from django.db import models
 from divisions.models import Base, Section, SubSection 
 from django.utils import timezone
+from django.urls import reverse
 
 class Board(Base):
 	"""
 		A Board can be used either as a Messaging Panel, Project or similar 
 	"""
 	section = models.ForeignKey(Section, related_name='board_sections', on_delete = models.PROTECT)
-	subsection = models.ForeignKey(SubSection, related_name='board_sections', on_delete = models.PROTECT)
+	subsection = models.ForeignKey(SubSection, blank = True, null = True, related_name='board_sections', on_delete = models.PROTECT)
 	public = models.BooleanField(default=False) # Determine if the board if for public viewing
 	archived = models.BooleanField(default=False) # Determine if the board's term has expired
+
+	def get_absolute_url(self):
+		return reverse('boards:board-detail', kwargs={'board_id': self.pk})
 
 class Listing(Base):
 	"""
@@ -17,11 +21,18 @@ class Listing(Base):
 	"""
 	board = models.ForeignKey(Board, related_name ="listing_boards", on_delete = models.PROTECT)
 
+	def get_absolute_url(self):
+		# return reverse('boards:listing-detail', kwargs={'board_id': self.board.pk, 'listing_id': self.pk})
+		return reverse('boards:board-detail', kwargs={'board_id': self.board.pk})
+
 class Item(Base):
 	"""
 		An Item can be seen as Tasks under each Listing
 	"""
 	Listing = models.ForeignKey(Listing, related_name ="item_listings", on_delete = models.PROTECT)
+		
+	def get_absolute_url(self):
+		return reverse('boards:board-detail', kwargs={'board_id': self.Listing.board.pk})
 
 class Comment(models.Model):
 	"""
