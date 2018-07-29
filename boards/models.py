@@ -1,7 +1,22 @@
 from django.db import models
-from divisions.models import Base, Section, SubSection 
+from divisions.models import *
 from django.utils import timezone
 from django.urls import reverse
+
+class Base(models.Model):
+	"""
+		A Base Model (Mixin Like) for the creation of Section and Team Models through Inheritance
+	"""
+	name = models.CharField(max_length = 50)
+	description = models.TextField(blank = True)
+	creator = models.ForeignKey('auth.User', on_delete = models.PROTECT)
+	created = models.DateTimeField(default = timezone.now)
+
+	class Meta:
+		abstract = True
+
+	def __str__(self):
+		return self.name
 
 class Board(Base):
 	"""
@@ -42,9 +57,15 @@ class Comment(models.Model):
 	comment = models.TextField()
 	comment_date = models.DateTimeField(default=timezone.now)
 	comment_by = models.ForeignKey('auth.User', on_delete = models.PROTECT)
+	
+	class Meta:
+		ordering = ('-comment_date',)
 
 	def __str__(self):
 		return self.comment
+	
+	def get_absolute_url(self):
+		return reverse('boards:item-detail', kwargs={'board_id': self.item.Listing.board.pk, 'listing_id': self.item.Listing.pk, 'item_id': self.item.pk})
 
 class Milestone(models.Model):
 	title = models.CharField(max_length=30, default='MileStone Title')

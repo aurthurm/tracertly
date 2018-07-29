@@ -17,7 +17,7 @@
 								<i class="fas fa-align-right faSize-bg"></i>
 							</div>
 							<div class="col-11">
-								<h6>Description: <a href="#"><i class="fas fa-pencil-alt faSize-bg"></i></a></h6>
+								<h6>Description: <a href="{% url 'boards:item-update' board_id=item_detail.Listing.board.pk listing_id=item_detail.Listing.pk  item_id=item_detail.pk %}"><i class="fas fa-pencil-alt faSize-bg"></i></a></h6>
 								<hr>
 								<div class="card-subtitle">
 									{{ item_detail.description }}
@@ -32,8 +32,14 @@
 								<hr>
 								{% for measure in milestones %}
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="{{ measure.title }}" value="{{ measure.pk }}">
-										<label class="form-check-label" for="{{ measure.title }}">{{ measure.title }}</label>
+										{% if measure.status == True %}		
+										<input update-url="{% url 'boards:milestone-ajax-update' item_id=item_detail.pk milestone_id=measure.pk %}" class="form-check-input milestone" type="checkbox" id="{{ measure.title }}" title="{{ measure.title }}" value="{{ measure.status }}" hidden>
+										<span class="text-success"><i class="fa fa-check-circle" aria-hidden="true"></i></span>				
+										{% else %}
+										<input update-url="{% url 'boards:milestone-ajax-update' item_id=item_detail.pk milestone_id=measure.pk %}" class="form-check-input milestone" type="checkbox" id="{{ measure.title }}" title="{{ measure.title }}" value="{{ measure.status }}" hidden>
+											<span class="text-danger"><i class="fa fa-minus" aria-hidden="true"></i></span><!-- minus-circle times times-circle -->
+										{% endif %}
+										<label class="form-check-label" for="{{ measure.title }}" style="margin-left:0.25rem;">{{ measure.title }}</label>
 									</div>
 									<!-- <i class="fas fa-check-circle"></i> <i class="fas fa-times-circle"></i> -->
 								{% endfor %}
@@ -43,33 +49,37 @@
 								<i class="far fa-comment faSize-bg"></i>
 							</div>
 							<div class="col-11">
-								<h6>Comment:</h6>
-								<form action="#">
+								<h5>Write Comment: 
+									<!-- <a href="{% url 'boards:comment-add' item_id=item_detail.pk %}" type="submit" style="margin-top: 60%; padding:1rem;">Add a Commet</a> -->
+								</h5>
+								<hr>
+								<form id="itemCommentForm" method='POST' action='{% url 'boards:comment-add' item_id=item_detail.pk %}' data-url='{{ commentCreateURL }}'>
+									{% csrf_token %}
 									<div class="row">
+										<label for="comment" hidden>Comment</label>
 										<div class="col-10">
-											<textarea class="form-control" id="task{{task.pk}}Textarea1" rows="3"></textarea>		      							
+											<textarea class="form-control" id="comment" rows="3"></textarea>		      							
 										</div>
 										<div class="col-2">
-											<a type="button" type="submit" style="margin-top: 60%" class="btn btn-info">Commit</a>
+											<button type="submit" style="margin-top: 60%" class="btn btn-info">Commit</button>
 										</div>
 									</div>		      						
 								</form>
 								<hr>
-								<h6>Comments:</h6>
+								<h6>Comments</h6>
 								<hr>
 								<div class="row">
-									<div class="col-2 commentor" style="margin-bottom: 1rem;">
-										<h6>Aurthur</h6>
-									</div>
-									<div class="col-10 comment" style="margin-bottom: 1rem;">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium esse reprehenderit ipsam consectetur velit quia aspernatur laboriosam repellat.
-									</div>
-									<div class="col-2 commentor" style="margin-bottom: 0.5rem;">
-										<h6>Casten</h6>
-									</div>
-									<div class="col-10 comment" style="margin-bottom: 0.5rem; border-top: 1px solid #ccc;">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia consequuntur excepturi itaque odit harum modi accusantium voluptatem. Odit rerum consectetur est vero culpa sapiente explicabo quibusdam earum dolor, quae doloribus?
-									</div>
+									{% for comment in comments %}
+										<div class="col-2 commentor" style="margin-bottom: 1rem;">
+											<h6>{{ comment.comment_by }}</h6>
+											<p class="lead" style="font-size:0.5rem;"><small>{{ comment.comment_date }}</small></p>
+										</div>
+										<div class="col-10 comment" style="margin-bottom: 1rem;">
+												{{ comment.comment }}
+
+										<hr>
+										</div>
+									{% endfor %}
 								</div>
 							</div>
 						</div>
@@ -80,7 +90,7 @@
 						<div class="btn-group-vertical btn-group-sm">
 							<a href="" class="btn btn-success"><i class="fas fa-user"></i> MEMBER</a>
 							<a href="" class="btn btn-success"><i class="fas fa-users"></i> TEAM</a>
-							<a href="" class="btn btn-success"><i class="fas fa-tasks"></i> MILESTONES</a>
+							<a href="{% url 'boards:milestone-add' item_id=item_detail.pk %}" class="btn btn-success"><i class="fas fa-tasks"></i> MILESTONES</a>
 						</div>
 						<hr>
 						<!-- move item to a different card  -->
@@ -89,10 +99,90 @@
 				</div>
 			</div>
 			<div class="item-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
 		</div>
 	</div>
+
+{% endblock %}
+
+
+
+{% block scripts %} 
+
+<script>
+
+	$(document).ready(function(){
+		// CommentForm Submit with Ajax
+		var $myForm = $('#itemCommentForm')
+        $myForm.submit(function(event){
+            event.preventDefault();
+			//var $formData = $(this).serialize();
+			var $formData = {
+				comment: $("#comment").val(),
+			}
+            var $thisURL = $myForm.attr('action');
+            $.ajax({
+                method: "POST",
+                url: $thisURL,
+                data: $formData,
+                success: handleFormSuccess,
+                error: handleFormError,
+            });
+        });
+
+        function handleFormSuccess(data, textStatus, jqXHR){
+			$myForm[0].reset(); // reset form data
+			window.location.reload();
+        }
+
+        function handleFormError(jqXHR, textStatus, errorThrown){
+            console.log(jqXHR)
+            console.log(textStatus)
+            console.log(errorThrown)
+		}
+		
+		// Milestone status update
+		$("input.milestone").on('click', function(e){
+			var inputStatus = $(this).val();
+			var updateURL = $(this).attr('update-url');
+			if(inputStatus === 'True'){
+				// Change to False
+				inputStatus = {
+					'csrfmiddlewaretoken': "{{ csrf_token }}",
+					title : $(this).attr("title"),
+					status: 'False',
+				}
+			}
+			if(inputStatus === 'False'){
+				// Change to True
+				inputStatus = {
+					'csrfmiddlewaretoken': "{{ csrf_token }}",
+					title : $(this).attr("title"),
+					status: 'True',
+				}
+			}
+			//axios.defaults.xsrfCookieName = 'csrftoken';
+			//axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+			//axios.put(updateURL, inputStatus)
+			//	.then(function(data){
+			//		console.log(data)
+			//	});
+			$.ajax({
+                method: "POST",
+                url: updateURL,
+				data: inputStatus,
+                success: function(){
+					window.location.reload();
+				},
+                error: function(){},
+            });
+		});
+
+
+	});
+
+</script>
+
+
 
 {% endblock %}

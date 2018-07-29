@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+from boards.models import Board
 
 class Base(models.Model):
 	"""
@@ -16,7 +18,6 @@ class Base(models.Model):
 	def __str__(self):
 		return self.name
 
-
 class Team(Base):
 	"""
 		A Team can be thought of as a group:
@@ -29,6 +30,8 @@ class Section(Base):
 		Each Section or sub section can have their own own teams
 	"""
 	teams = models.ManyToManyField(Team, related_name='section_teams', blank = True)
+	members = models.ManyToManyField(User, related_name='section_members', blank =True)
+	boards = models.ManyToManyField(Board, related_name='section_boards', blank =True)
 
 class SubSection(Base):	
 	"""

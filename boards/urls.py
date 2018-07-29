@@ -16,5 +16,7 @@ urlpatterns = [
     path('board/<int:board_id>/listing/<int:listing_id>/item/<int:item_id>/detail', ItemDetail.as_view(), name='item-detail'),
     path('board/<int:board_id>/listing/<int:listing_id>/item/<int:item_id>/update', ItemUpdate.as_view(), name='item-update'),
     path('board/listing/item/<int:item_id>/milestone/add', MilestoneCreate.as_view(), name='milestone-add'),
-    path('board/listing/item/<int:item_id>/milestone/<int:milestone_id>/update', MilestoneUpdate.as_view(), name='milestone-update')
+    path('board/listing/item/<int:item_id>/milestone/<int:milestone_id>/update', MilestoneUpdate.as_view(), name='milestone-update'),
+    path('board/listing/item/<int:item_id>/milestone/<int:milestone_id>/update', milestoneAjaxUpdate, name='milestone-ajax-update'),
+    path('board/listing/item/<int:item_id>/comment/add', CommentCreate.as_view(), name='comment-add'),
 ]

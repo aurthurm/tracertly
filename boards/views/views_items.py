@@ -13,9 +13,13 @@ class ItemDetail(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		item = get_object_or_404(Item, pk=self.kwargs.get('item_id'))
+		comments = item.item_comments.all()
 		milestones = item.milestone_set.all()
 		context['header'] = "All Boards"
 		context['milestones'] = milestones
+		context['comments'] = comments
+		commentCreateURL = "board/listing/item/" + str(item.pk) + "/comment/add"
+		context['commentCreateURL'] = commentCreateURL
 		return context
 
 class ItemCreate(LoginRequiredMixin, CreateView):

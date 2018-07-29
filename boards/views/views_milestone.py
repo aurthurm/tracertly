@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from boards.models import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from boards.mixins import AjaxableResponseMixin
+from django.http import JsonResponse
 
 
 class MilestoneCreate(LoginRequiredMixin, CreateView):
@@ -21,6 +23,19 @@ class MilestoneUpdate(UpdateView):
 	model = Milestone
 	fields = ['title', 'status']
 	pk_url_kwarg = 'milestone_id'
+
+def milestoneAjaxUpdate(request, milestone_id):
+	if request.method == "POST" and request.is_ajax():
+		status = request.POST['status']
+		milestone = get_object_or_404(Milestone, pk=milestone_id)
+		milestone.status = status
+		milestone.save()
+		data = {
+			'message': "Successfully update milestone"
+		}
+		return JsonResponse(data)
+	else:
+		return JsonResponse({'status':'Failed'})
 
 class MilestoneDelete(DeleteView):
 	model = Milestone
