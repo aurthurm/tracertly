@@ -30,15 +30,15 @@ class Section(Base):
 		Each Section or sub section can have their own own teams
 	"""
 	teams = models.ManyToManyField(Team, related_name='section_teams', blank = True)
-	members = models.ManyToManyField(User, related_name='section_members', blank =True)
-	boards = models.ManyToManyField(Board, related_name='section_boards', blank =True)
+	members = models.ManyToManyField('auth.User', related_name='section_members', blank =True)
+	boards = models.ManyToManyField('boards.Board', related_name='section_boards', blank =True)
 
 class SubSection(Base):	
 	"""
 		A Section can have sections within itself (sub sections)
 		Each SubSection belongs to a Section
 	"""
-	mainSection = models.ForeignKey(Section, related_name ='main_section', on_delete = models.PROTECT, blank = False)
+	mainSection = models.ForeignKey('divisions.Section', related_name ='main_section', on_delete = models.PROTECT, blank = False)
 	teams = models.ManyToManyField(Team, related_name='subsection_teams', blank = True)
 
 

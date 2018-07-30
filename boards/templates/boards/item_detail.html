@@ -28,8 +28,22 @@
 								<i class="fas fa-tasks  faSize-bg"></i>
 							</div>
 							<div class="col-11">
-								<h6>MILESTONES</h6>
+								<h6>MILESTONES: <span class="revealMilestone"><i class="fas fa-plus faSize-bg"></i></span></h6>
 								<hr>
+								<div class="addMilestone" style="display:none">
+									<form id="addMilestoneForm" method='POST' action='{% url 'boards:milestone-add' item_id=item_detail.pk %}' >
+										{% csrf_token %}
+										<div class="row">
+											<div class="col-6">
+												<input id="milestone" class="form-control form-control-sm" type="text" placeholder="Add Milestone ...">	      							
+											</div>
+											<div class="col-2">
+												<button type="submit"  class="btn btn-info">Add</button>
+											</div>
+										</div>		      						
+									</form>
+									<hr>
+								</div>
 								{% for measure in milestones %}
 									<div class="form-check form-check-inline">
 										{% if measure.status == True %}		
@@ -90,11 +104,12 @@
 						<div class="btn-group-vertical btn-group-sm">
 							<a href="" class="btn btn-success"><i class="fas fa-user"></i> MEMBER</a>
 							<a href="" class="btn btn-success"><i class="fas fa-users"></i> TEAM</a>
-							<a href="{% url 'boards:milestone-add' item_id=item_detail.pk %}" class="btn btn-success"><i class="fas fa-tasks"></i> MILESTONES</a>
+							<a href="#" class="btn btn-success revealMilestone"><i class="fas fa-tasks"></i> MILESTONES</a>
 						</div>
 						<hr>
-						<!-- move item to a different card  -->
-						<a href="" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Move Item</a>
+						<!-- move item to a different card  
+							<a href="" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Move Item</a>
+						-->
 					</div>
 				</div>
 			</div>
@@ -112,6 +127,7 @@
 <script>
 
 	$(document).ready(function(){
+
 		// CommentForm Submit with Ajax
 		var $myForm = $('#itemCommentForm')
         $myForm.submit(function(event){
@@ -178,8 +194,38 @@
             });
 		});
 
+		// Reveal Add Milestone Form
+		$('.revealMilestone').on('click', function(e){
+			$('.addMilestone').removeAttr("style");
+		});
+
+		// Submit Add Milestone Form
+		$("form#addMilestoneForm").on('submit', function(e){
+			e.preventDefault();
+			var milestone = $("input#milestone").val();
+			var url = $(this).attr('action');
+			data = {
+				title : milestone,
+				status: 'False',
+			}
+			console.log(data);
+			console.log(url);
+			console.log(milestone);
+			$.ajax({
+                method: "POST",
+                url: url,
+				data: data,
+                success: function(){
+					window.location.reload();
+					$('form#addMilestoneForm')[0].reset();
+				},
+                error: function(){},
+            });
+		});
 
 	});
+
+
 
 </script>
 

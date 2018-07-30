@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<h3>{{ header }}</h3>
+	<div class="row">
+		<div class="col-8">
+			<h3>
+				{{ header }} 
+			</h3>
+		</div>
+		<div class="col-3"> 
+			<a class="float-right" href="{% url 'boards:board-add' %}">
+				Create Board	
+			</a>
+		</div>
+	</div>
 	<p class="lead text-muted">{{ sub_header }}</p>
 	<hr>
 	<div class="card-columns">
@@ -34,7 +45,6 @@
 				<a href="{% url 'boards:board-add' %}">Create Board</a>
 			</p>
 		</div>
-
 
 
 	</div>

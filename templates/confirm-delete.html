@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-6 offset-3" style="margin-top:2rem;">
+            <h4>Delete Confirmation</h4>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <div class="alert alert-warning" role="alert">
+                    <p class="lead">You are about to delete: <b>{{ object }}</b></p>
+                   <p> Are you sure? This is not reversible!</p>
+                </div>
+                <input type="submit" class="btn btn-danger" value="Delete"/>
+            </form>
+        </div>
+    </div>    
+    
+{% endblock %}

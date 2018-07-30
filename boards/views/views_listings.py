@@ -19,6 +19,12 @@ class ListingCreate(LoginRequiredMixin, CreateView):
 	model = Listing
 	fields = ['name', 'description']
 	pk_url_kwarg = 'listing_id'
+	template_name = 'create-form.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['formTitle'] = "Add Listing"
+		return context
 
 	def get_initial(self):
 		board = get_object_or_404(Board, pk=self.kwargs.get('board_id'))
@@ -35,8 +41,10 @@ class ListingUpdate(UpdateView):
 	# form_class = ListingForm
 	fields = ['name', 'description']
 	pk_url_kwarg = 'listing_id'
+	template_name = 'create-form.html'
 
 class ListingDelete(DeleteView):
 	model = Listing
 	pk_url_kwarg = 'listing_id'
+	template_name = 'confirm-delete.html'
 	success_url = "/"

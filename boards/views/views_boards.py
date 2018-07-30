@@ -29,6 +29,12 @@ class BoardDetail(DetailView):
 class BoardCreate(LoginRequiredMixin, CreateView):
 	model = Board
 	fields = ['name', 'description','section', 'subsection', 'public', 'archived']
+	template_name = 'create-form.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['formTitle'] = "Create Board"
+		return context
 
 	def form_valid(self, form):
 		form.instance.creator = self.request.user
@@ -37,7 +43,10 @@ class BoardCreate(LoginRequiredMixin, CreateView):
 class BoardUpdate(UpdateView):
 	model = Board
 	fields = ['name', 'description','section', 'subsection', 'public', 'archived']
+	template_name = 'create-form.html'
 
 class BoardDelete(DeleteView):
 	model = Board
+	pk_url_kwarg = 'board_id'
+	template_name = 'confirm-delete.html'
 	success_url = "/"

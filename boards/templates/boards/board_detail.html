@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<h3>Board: {{ board_detail.name }}</h3>
+
+	<div class="row">
+		<div class="col-8">
+			<h3>Board: {{ board_detail.name }}</h3>
+		</div>
+		<div class="col-3"> 
+			<a class="float-right" href="{% url 'boards:listing-add' board_id=board_detail.pk %}">
+				Add Listing	
+			</a>
+		</div>
+	</div>	
 	<hr>
 	<p class="lead text-muted">{{ board_detail.description }}</p>
 	<hr>
@@ -19,7 +29,7 @@
 									<a href="#">
 										<i class="far fa-edit"></i>
 									</a>
-									<a href="#">
+									<a href="{% url 'boards:item-detail' board_id=board_detail.pk listing_id=listing.pk item_id=task.pk %}">
 										<i class="fas fa-expand-arrows-alt"></i>
 									</a>
 								</span>

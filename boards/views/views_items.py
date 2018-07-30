@@ -26,6 +26,12 @@ class ItemCreate(LoginRequiredMixin, CreateView):
 	model = Item
 	fields = ['name', 'description']
 	pk_url_kwarg = 'item_id'
+	template_name = 'create-form.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['formTitle'] = "Add Item"
+		return context
 
 	def form_valid(self, form):
 		form.instance.creator = self.request.user
@@ -37,6 +43,7 @@ class ItemUpdate(UpdateView):
 	model = Item
 	fields = ['name', 'description']
 	pk_url_kwarg = 'item_id'
+	template_name = 'create-form.html'
 
 class ItemDelete(DeleteView):
 	model = Item

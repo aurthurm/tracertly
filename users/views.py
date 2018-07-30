@@ -1,6 +1,13 @@
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 from .forms import SignUpForm
+from .models import UserProfile
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from boards.mixins import AjaxableResponseMixin
+from django.http import JsonResponse
 
 def signup(request):
     if request.method == 'POST':
@@ -15,3 +22,31 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+class UserProfileDetail(DetailView):
+	model = UserProfile
+	context_object_name = 'board_detail'
+	pk_url_kwarg = 'board_id'
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
+	
+class UserProfileCreate(LoginRequiredMixin, CreateView):
+	model = UserProfile
+	fields = ['title', 'phone','teams', 'section', 'subsection', 'status', 'about']
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['formTitle'] = "Create your Profile"
+		return context
+
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		return super().form_valid(form)
+
+class UserProfileUpdate(UpdateView):
+	model = UserProfile
+	fields = ['title', 'phone','teams', 'section', 'subsection', 'status', 'about']
+	template_name = 'create-form.html'
