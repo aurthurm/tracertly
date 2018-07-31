@@ -29,6 +29,21 @@
         }
     );
 
+/* login modal */
+$('#login-modal').modal('show');
+$('#username').focus();
+
+/*Drop down shownon hover*/
+$(function() {
+    $(".dropdown").hover(
+        function(){ $(this).addClass('open') },
+        function(){ $(this).removeClass('open') }
+    );
+});
+
+
+
+
 // Enable Django CSRF-ready AJAX Calls
     function getCookie(name) {
         var cookieValue = null;

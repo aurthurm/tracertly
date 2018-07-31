@@ -26,8 +26,9 @@ def signup(request):
 
 class UserProfileDetail(DetailView):
 	model = UserProfile
-	context_object_name = 'board_detail'
-	pk_url_kwarg = 'board_id'
+	context_object_name = 'profile'
+	pk_url_kwarg = 'profile_id'
+	template_name = 'users/profile.html'
 	
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -36,6 +37,7 @@ class UserProfileDetail(DetailView):
 class UserProfileCreate(LoginRequiredMixin, CreateView):
 	model = UserProfile
 	fields = ['title', 'phone','teams', 'section', 'subsection', 'status', 'about']
+	template_name = 'users/create-profile.html'
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)

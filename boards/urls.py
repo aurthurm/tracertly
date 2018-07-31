@@ -4,6 +4,7 @@ from boards.views import *
 app_name = 'boards'
 urlpatterns = [
     path('all/', BoardList.as_view(), name='board-list'),
+    path('my-boards/user-<int:user_id>/all', UserBoards.as_view(), name='user-boards'),
     path('board/<int:board_id>/detail', BoardDetail.as_view(), name='board-detail'),
     path('board/add/', BoardCreate.as_view(), name='board-add'),
     path('board/<int:board_id>/update/', BoardUpdate.as_view(), name='board-update'),

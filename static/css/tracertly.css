@@ -1,7 +1,32 @@
- /* 
+/*
+    App:       Tracertly
+    Developer: Aurthur Musendame
+    Email:     aurthurmusendame@gmail.com
+    Phone:     +263776406399
+    ::::::     :::::::::::::::::::::::::::::::::::::::::::::::: 15-12-2016
+    Git :      www.github.com/aurthurm/Tracertly.git
+*/
+
+
+/* 
     ::::::::::::::::::::::::: Base Styles
  */
 
+ html,
+ body {
+    background-image: url('../img/bg/leather.png');
+}
+
+
+ /* 
+    ::::::::::::::::::::::::: Main Navigation
+ */
+
+ .user-names {
+    font-weight: 900 !important;
+    color: #fff;
+    margin-bottom: -1px;
+}
 
   /* 
     ::::::::::::::::::::::::: Off Canvas Menu
@@ -55,12 +80,6 @@
     ::::::::::::::::::::::::: Cards
 */
 
-
- .faSize-bg {
-     float: right;
-     font-size: 1.25rem
- }
-
 /* body .main-content .card-columns {
      -webkit-column-count: 3;
      column-count: 3;
@@ -81,8 +100,8 @@
  
 .card-text .cardTextMore {
      float: right;
-     background: #ccc;
-     padding: .25em
+     /* background: #ccc;
+     padding: .125em */
  }
 
  /* 
@@ -94,3 +113,19 @@
      float: right;
      font-size: 1.25rem
  }
+
+/* 
+    ::::::::::::::::::::::::: Modals
+*/
+
+.modal-body {
+    padding: 5% 20%;
+}
+
+#login-modal {
+    margin-top: 8%;
+}
+
+.middle-page {
+    margin-top: 15%;
+}
