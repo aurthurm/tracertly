@@ -1,10 +1,12 @@
 from django import forms
 from boards.models import *
-from tinymce.widgets import TinyMCE
+# from tinymce.widgets import TinyMCE
+from ckeditor.widgets import CKEditorWidget
 
-class ListingForm(forms.ModelForm):
+class BoardForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
     class Meta:
-        model = Listing
+        model = Board
         # fields = '__all__'
         fields = ['name', 'description']
-        widgets = { 'description': TinyMCE(attrs={'cols': 80, 'rows': 30}) }
+        # widgets = { 'description': CKEditorWidget()}

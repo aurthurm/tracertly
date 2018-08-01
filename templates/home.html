@@ -8,7 +8,7 @@
 		{% for board in boards %}	
 			<!-- Board -->	
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body board-color">
 				    <h5 class="card-title"> 
 				    	<a href="{% url 'boards:board-detail' board_id=board.pk %}" class="card-link text-center">{{ board.name }}</a>
 				    </h5>

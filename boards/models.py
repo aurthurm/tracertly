@@ -45,6 +45,7 @@ class Item(Base):
 		An Item can be seen as Tasks under each Listing
 	"""
 	Listing = models.ForeignKey(Listing, related_name ="item_listings", on_delete = models.PROTECT)
+	assignee = models.ForeignKey('auth.User', on_delete = models.PROTECT, related_name="item_assignee", blank=True, null=True)
 		
 	def get_absolute_url(self):
 		return reverse('boards:board-detail', kwargs={'board_id': self.Listing.board.pk})

@@ -8,7 +8,7 @@
 			</h3>
 		</div>
 		<div class="col-3"> 
-			<a class="float-right" href="{% url 'boards:board-add' %}">
+			<a class="float-right add-color" href="{% url 'boards:board-add' %}">
 				Create Board	
 			</a>
 		</div>
@@ -19,7 +19,7 @@
 		{% for board in object_list %}	
 			<!-- Board -->	
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body board-color">
 				    <h5 class="card-title"> 
 				    	<a href="{% url 'boards:board-detail' board_id=board.pk %}" class="card-link text-center">{{ board.name }}</a>
 				    </h5>
@@ -41,7 +41,7 @@
 		{% endfor %}
 
 		<div class="card-body">
-			<p class="card-text">
+			<p class="card-text add-color">
 				<a href="{% url 'boards:board-add' %}">Create Board</a>
 			</p>
 		</div>

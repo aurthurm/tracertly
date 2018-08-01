@@ -11,7 +11,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', viewz.login, name='login'),
     path('accounts/logout/', viewz.logout, name='logout', kwargs={'next_page': '/'}),
-    re_path(r'^tinymce/', include('tinymce.urls')),
     # path('api/', include(router.urls)),
     path('', views.home, name='home'),
     path('users/', include('users.urls')),

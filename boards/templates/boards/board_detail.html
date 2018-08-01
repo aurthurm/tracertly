@@ -7,7 +7,7 @@
 			<h3>Board: {{ board_detail.name }}</h3>
 		</div>
 		<div class="col-3"> 
-			<a class="float-right" hhref="{% url 'boards:listing-add' board_id=board_detail.pk %}" data-toggle="modal" data-target="#addListing">
+			<a class="float-right add-color" hhref="{% url 'boards:listing-add' board_id=board_detail.pk %}" data-toggle="modal" data-target="#addListing">
 				Add Listing	
 			</a>
 		</div>
@@ -18,12 +18,12 @@
 	<div class="card-columns">
 		{% for listing in board_listings %}
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body listing-color">
 				    <h5 class="card-title">{{ listing.name }}</h5>
 				    <hr>
 				    {% for task in listing.item_listings.all %}
 						<div class="card-body">
-							<p class="card-text">
+							<p class="card-text item-color">
 								{{ task.name }}
 								<span class="cardTextMore">
 									<a href="#">
@@ -38,16 +38,16 @@
 				    {% endfor %}
 					<a class="addItem{{listing.pk}}" hhref="{% url 'boards:item-add' board_id=board_detail.pk listing_id=listing.pk %}" class="card-link" data-toggle="modal" data-target="#addItem{{listing.pk}}">+ add item</a>
 					<!-- ITEM Modal -->
-					<div class="modal fade" id="addItem{{listing.pk}}" tabindex="-1" role="dialog" aria-labelledby="addItem" aria-hidden="true">
+					<div class="modal fade top-spacer" id="addItem{{listing.pk}}" tabindex="-1" role="dialog" aria-labelledby="addItem" aria-hidden="true">
 						<div class="modal-dialog" role="document">
-							<div class="modal-content">
+							<div class="modal-content item-color">
 								<div style="padding:2rem;">
 									<form class="addItem{{listing.pk}}" method='POST' action="{% url 'boards:item-add' board_id=board_detail.pk listing_id=listing.pk %}">
 										{% csrf_token %}
 										<div class="form-group row">
 											<label for="name" class="col-3 col-form-label">Title</label>
 											<div class="col-9">
-												<input type="text" class="form-control" id="name" placeholder="Email">
+												<input type="text" class="form-control" id="name" placeholder="item name">
 											</div>
 										</div>
 										<div class="form-group row">
@@ -71,23 +71,23 @@
 		{% endfor %}
 
 		<div class="card-body">
-			<p class="card-text">
+			<p class="card-text add-color">
 				<a hhref="{% url 'boards:listing-add' board_id=board_detail.pk %}" data-toggle="modal" data-target="#addListing">Add Listing</a>
 			</p>
 		</div>
 
 
-	<!-- Modal -->
-	<div class="modal fade" id="addListing" tabindex="-1" role="dialog" aria-labelledby="addListing" aria-hidden="true">
+	<!-- Listing Modal -->
+	<div class="modal fade top-spacer" id="addListing" tabindex="-1" role="dialog" aria-labelledby="addListing" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content listing-color">
 				<div  style="padding:2rem;">
 					<form id="createListing" method='POST' action="{% url 'boards:listing-add' board_id=board_detail.pk %}">
 						{% csrf_token %}
 						<div class="form-group row">
 							<label for="name" class="col-3 col-form-label">Title</label>
 							<div class="col-9">
-								<input type="text" class="form-control" id="name" placeholder="Email">
+								<input type="text" class="form-control" id="name" placeholder="Listing name">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -114,6 +114,26 @@
 
 	$(document).ready(function(){
 
+		// Submit Add Listing Form
+		$("form#createListing").on('submit', function(e){
+			e.preventDefault();
+			var url = $(this).attr('action');
+			data = {
+				name : $(this).find("input#name").val(),
+				description: $(this).find("textarea#description").val(),
+			}
+			$.ajax({
+				method: "POST",
+				url: url,
+				data: data,
+				success: function(){
+					window.location.reload();
+					$('form#createListing')[0].reset();
+				},
+				error: function(){},
+			});
+		});
+		
 		// Submit Add Item Form
 		$("form").on('submit', function(e, hhref){
 			e.preventDefault();
@@ -136,25 +156,6 @@
             });
 		});
 
-		// Submit Add Listing Form
-		$("form#createListing").on('submit', function(e){
-			e.preventDefault();
-			var url = $(this).attr('action');
-			data = {
-				name : $(this).find("input#name").val(),
-				description: $(this).find("textarea#description").val(),
-			}
-			$.ajax({
-				method: "POST",
-				url: url,
-				data: data,
-				success: function(){
-					window.location.reload();
-					$('form#createListing')[0].reset();
-				},
-				error: function(){},
-			});
-		});
 	});
 
 	</script>
