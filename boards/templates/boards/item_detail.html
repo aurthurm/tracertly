@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<div class="" style="max-widthh: 75% !important;">
+	<div class="">
 		<div class="item-content" >
 			<div class="item-header">
 				<h5 class="item-title" id="">
@@ -101,12 +101,22 @@
 					<div class="col-2">
 						<hr>
 						<div class="btn-group-vertical btn-group-sm">
-							<a href="" class="btn btn-info"><i class="fas fa-user"></i> Assignee</a>
+							{% if not assignee %}
+								<a href="{% url 'boards:item-update'  board_id=item_detail.Listing.board.pk listing_id=item_detail.Listing.pk  item_id=item_detail.pk  %}" class="btn btn-info"><i class="fas fa-user"></i> Assignee</a>
+							{% else %}
+								<div class="d-flex justify-content-around align-items-center">
+									<span class="mr-2">
+										<a href="{% url 'boards:item-update'  board_id=item_detail.Listing.board.pk listing_id=item_detail.Listing.pk  item_id=item_detail.pk  %}"><i class="fas fa-user"></i></a>
+									</span>
+									{% if full_name %}
+										<span class="assignee {{ assigned }}" data-toggle="tooltip" data-placement="bottom" title="{{ full_name }}">{{ assignee }}</span>
+									{% else %}
+										<span class="assignee {{ assigned }}">{{ assignee }}</span>
+									{% endif %}
+								</div>
+							{% endif %}
 						</div>
 						<hr>
-						<!-- move item to a different card  
-							<a href="" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Move Item</a>
-						-->
 					</div>
 				</div>
 			</div>

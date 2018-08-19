@@ -35,7 +35,11 @@
                         @{{ user.username }} 
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item link-transition" href="{% url 'users:profile-detail' user_id=user.pk profile_id=user.user_profile.pk %}">Profile</a>
+                        {% if not user.user_profile %}
+                            <a class="dropdown-item link-transition" href="{% url 'users:create-profile' %}">Create Profile</a>
+                        {% else %}
+                            <a class="dropdown-item link-transition" href="{% url 'users:profile-detail' user_id=user.pk profile_id=user.user_profile.pk %}">Profile</a>
+                        {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-logout" href="{% url 'logout' %}">
                             Sign Out

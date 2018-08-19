@@ -22,13 +22,10 @@ class UserBoards(ListView):
 		context = super().get_context_data(**kwargs)
 		# get the request / logged on user
 		user = self.request.user
-		print(user)
-		print(user.pk)
 		# Get all the boards the user has created
 		user_boards = Board.objects.filter(creator=user)
-		print(user_boards)
 		context['header'] = "My Boards"
-		context['sub_header'] = "These are the boards you created including those on which others within your circle have created"
+		context['sub_header'] = "These are the boards you created."
 		context['user_boards'] = user_boards
 		return context
 

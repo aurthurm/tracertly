@@ -8,6 +8,7 @@ def home(request):
     public_boards = Board.objects.all().filter(public=True).exclude(archived=True)
     context = {
     	'heading': heading,
-    	'boards': public_boards
+    	'boards': public_boards,
+    	'boards_count': public_boards.count(),
     }
     return render(request, 'home.html', context=context)

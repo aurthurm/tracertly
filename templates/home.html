@@ -4,31 +4,42 @@
     
 	<h3>{{ heading }}</h3>
 	<hr>
+	{% if boards_count != 0 %}
 	<div class="card-columns">
-		{% for board in boards %}	
-			<!-- Board -->	
-			<div class="card">
-				<div class="card-body board-color">
-				    <h5 class="card-title"> 
-				    	<a href="{% url 'boards:board-detail' board_id=board.pk %}" class="card-link text-center">{{ board.name }}</a>
-				    </h5>
-				    <hr>
-					  <div class="card-body">
-					    <p class="card-text">
-					    	{{ board.description }}
-					    	<span class="cardTextMore">
-					    		<a href="#">
-					    			<i class="far fa-edit"></i>
-					    		</a>
-					    	</span>
-					    </p>
+			{% for board in boards %}	
+				<!-- Board -->	
+				<div class="card">
+					<div class="card-body board-color">
+						<h5 class="card-title"> 
+							<a href="{% url 'boards:board-detail' board_id=board.pk %}" class="card-link text-center">{{ board.name }}</a>
+						</h5>
+						<hr>
+						<div class="card-body bg-white">
+							<p class="card-text">
+								{{ board.description }}
+								<span class="cardTextMore">
+									<a href="#">
+										<i class="far fa-edit"></i>
+									</a>
+								</span>
+							</p>
+						</div>
+						<hr>		   
 					</div>
-					<hr>		   
 				</div>
-			</div>
-			<!-- / Board -->
-		{% endfor %}
-	</div>
+				<!-- / Board -->
+			{% endfor %}
+		</div>
+		{% else %}
+			<!-- if boards do not exist on public notice board
+			then tell the user that there are no public boards yet otherwise
+			give then an ability to start creating some  -->
+			<h3 class="spacer">Sorry! </h3>
+			<p class="lead">There are no public boards yet. You might be the first one to create some.</p>
+			<hr>
+
+			<a href="{% url 'boards:board-add' %}">Create Board</a>
+		{% endif %}
 
 {% endblock %}
 

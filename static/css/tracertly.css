@@ -31,9 +31,24 @@ a:hover {
     margin-top: 8%;
 }
 
+.assignee.initialz {
+    border: 1px solid #303C6C;
+    padding: 5%;
+    margin: 0.25rem auto;
+    border-radius: 50%;
+}
+
+.assignee.usernem {
+    border: 1px solid yellow;
+    padding: 0.25rem;
+    border-radius: 15%;
+}
+
 /* 
     ::::::::::::::::::::::::: Colors
  */
+
+
 
 .sidenav,
 .bg-dark,
@@ -53,6 +68,7 @@ a.dropdown-item:hover {
     color: #F4976C !important;   
 }
 
+.assignee.initialz,
 .sidenav a,
 a.add-color,
 a.add-color:hover,
