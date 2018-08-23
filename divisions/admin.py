@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Section, SubSection, Team, SubTeam
+from .models import Section, Team
 
 admin.site.register(Section)
-admin.site.register(SubSection)
 admin.site.register(Team)
-admin.site.register(SubTeam)

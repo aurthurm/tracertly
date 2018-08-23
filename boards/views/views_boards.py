@@ -44,7 +44,7 @@ class BoardDetail(DetailView):
 	
 class BoardCreate(LoginRequiredMixin, CreateView):
 	model = Board
-	fields = ['name', 'description','section', 'subsection', 'public', 'archived']
+	fields = ['name', 'description','section', 'public', 'archived']
 	template_name = 'create-form.html'
 
 	def get_context_data(self, **kwargs):
@@ -58,7 +58,7 @@ class BoardCreate(LoginRequiredMixin, CreateView):
 
 class BoardUpdate(UpdateView):
 	model = Board
-	fields = ['name', 'description','section', 'subsection', 'public', 'archived']
+	fields = ['name', 'description','section', 'public', 'archived']
 	template_name = 'create-form.html'
 
 class BoardDelete(DeleteView):

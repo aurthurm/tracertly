@@ -23,7 +23,6 @@ class Board(Base):
 		A Board can be used either as a Messaging Panel, Project or similar 
 	"""
 	section = models.ForeignKey('divisions.Section', related_name='board_sections', on_delete = models.PROTECT)
-	subsection = models.ForeignKey('divisions.SubSection', blank = True, null = True, related_name='board_sections', on_delete = models.PROTECT)
 	public = models.BooleanField(default=False) # Determine if the board if for public viewing
 	archived = models.BooleanField(default=False) # Determine if the board's term has expired
 

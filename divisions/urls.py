@@ -1,9 +1,15 @@
 from django.urls import path, re_path
-from .views import SectionList, SectionDetail, SubSectionDetail
+from divisions.views import (
+    SectionList, SectionDetail, SectionCreate, SectionUpdate, SectionDelete,
+    TeamList, TeamDetail, TeamCreate, TeamUpdate, TeamDelete
+)
 
 app_name = 'divisions'
 urlpatterns = [
     path('sections/', SectionList.as_view(), name='section-list'),
-    path('section-detail/<int:pk>/', SectionDetail.as_view(), name='section-detail'),
-    path('section-detail/sub/<int:pk>/', SubSectionDetail.as_view(), name='subsection-detail'),
+    path('section-detail/<int:section_id>/', SectionDetail.as_view(), name='section-detail'),
+    path('section/add/', SectionCreate.as_view(), name='section-add'),
+    path('teams/', SectionList.as_view(), name='team-list'),
+    path('team-detail/<int:team_id>/', SectionDetail.as_view(), name='team-detail'),
+    path('team/add/', TeamCreate.as_view(), name='team-add'),
 ]

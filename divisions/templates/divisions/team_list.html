@@ -5,12 +5,12 @@
 	<p class="lead text-muted">{{ sub_header }}</p>
 	<hr>
 	<div class="card-columns">
-		{% for section in sections %}	
+		{% for team in teams %}	
 			<!-- Board -->	
 			<div class="card">
 				<div class="card-body">
 				    <h5 class="card-title"> 
-				    	<a href="{% url 'divisions:section-detail' pk=section.pk %}" class="card-link text-center">{{ section.name }}</a>
+				    	<a href="{% url 'divisions:team-detail' pk=team.pk %}" class="card-link text-center">{{ team.name }}</a>
 				    </h5>
 				  <hr>
 					  <div class="card-body">

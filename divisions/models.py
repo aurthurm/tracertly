@@ -22,7 +22,10 @@ class Team(Base):
 	"""
 		A Team can be thought of as a group:
 	"""
-	pass
+	members = models.ManyToManyField('auth.User', related_name='team_members', blank =True)
+	
+	def get_absolute_url(self):
+		return reverse('divisions:team-detail', kwargs={'team_id': self.pk})
 
 class Section(Base):
 	"""
@@ -32,19 +35,6 @@ class Section(Base):
 	teams = models.ManyToManyField(Team, related_name='section_teams', blank = True)
 	members = models.ManyToManyField('auth.User', related_name='section_members', blank =True)
 	boards = models.ManyToManyField('boards.Board', related_name='section_boards', blank =True)
-
-class SubSection(Base):	
-	"""
-		A Section can have sections within itself (sub sections)
-		Each SubSection belongs to a Section
-	"""
-	mainSection = models.ForeignKey('divisions.Section', related_name ='main_section', on_delete = models.PROTECT, blank = False)
-	teams = models.ManyToManyField(Team, related_name='subsection_teams', blank = True)
-
-
-class SubTeam(Base):	
-	"""
-		A Team can have small teams within itself (sub teams)
-		Each SubTeam belongs to a Team
-	"""
-	mainTeam = models.ForeignKey(Team, related_name ='main_team', on_delete = models.PROTECT, blank = False)
+	
+	def get_absolute_url(self):
+		return reverse('divisions:section-detail', kwargs={'team_id': self.pk})
