@@ -2,70 +2,28 @@
 
 {% block content %}
 	<div class="container">
-		<h2>Section: {{ section.name }}</h2>
+		<h2>{{ its_a }}: {{ object_detail.name }}</h2>
+		<hr>
+		<div class="card-body bg-white">
+			<p class="card-text">
+				{{ object_detail.description }}
+			</p>
+		</div>
+		<hr>
 			<nav style="margin-bottom: 2rem;">
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Discussions</a>
-					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Boards</a>
+					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-discusions" role="tab" aria-controls="nav-home" aria-selected="true">Discussions</a>
+					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-boards" role="tab" aria-controls="nav-profile" aria-selected="false">Our Boards</a>
+					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-profile" aria-selected="false">Our Teams</a>
 				</div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
 				<!-- Discusions -->
-				<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-					<div class="card-columns">
-						{% for discussion in discusions %}	
-							<!-- Board -->	
-							<div class="card">
-								<div class="card-body">
-								    <h5 class="card-title"> 
-								    	<a href="" class="card-link text-center">{{ }}</a>
-									</h5>
-									<hr>
-									  <div class="card-body">
-									    <p class="card-text">
-									    	{{ board.description }}
-									    	<span class="cardTextMore">
-									    		<a href="#">
-									    			<i class="far fa-edit"></i>
-									    		</a>
-									    	</span>
-									    </p>
-									</div>
-									<hr>		   
-								</div>
-							</div>
-							<!-- / Board -->
-						{% endfor %}
-					</div>
-				</div>
-				<!-- Boards -->
-				<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-					<div class="card-columns">
-						{% for board in section_detail.board_sections.all %}	
-							<!-- Board -->	
-							<div class="card">
-								<div class="card-body">
-								    <h5 class="card-title"> 
-								    	<a href="{% url 'boards:board-detail' pk=board.pk %}" class="card-link text-center">{{ board.name }}</a>
-								    </h5>
-								  <hr>
-									  <div class="card-body">
-									    <p class="card-text">
-									    	{{ board.description }}
-									    	<span class="cardTextMore">
-									    		<a href="#">
-									    			<i class="far fa-edit"></i>
-									    		</a>
-									    	</span>
-									    </p>
-									</div>
-									<hr>		   
-								</div>
-							</div>
-							<!-- / Board -->
-						{% endfor %}
-					</div>
-				</div>
+				{% include './includes/section-detail-discusions.html' %}
+				<!-- Boards -->				
+				{% include './includes/section-detail-boards.html' %}
+				<!-- Teams -->				
+				{% include './includes/section-detail-teams.html' %}
 			</div>
 	</div>
 {% endblock %}

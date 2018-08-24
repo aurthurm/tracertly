@@ -6,20 +6,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class TeamList(LoginRequiredMixin, ListView):
 	model = Team
-	context_object_name = 'teams'
+
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['header'] = "Teams"
 		context['sub_header'] = "We are groups of individuals working towards a common goal"
+		context['colorStyle'] = "team-color"
 		return context
 
 class TeamDetail(LoginRequiredMixin, DetailView):
 	model = Team
-	context_object_name = 'team_detail'
 	pk_url_kwarg = 'team_id'
+	context_object_name = 'object_detail'
 	
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
+		context['its_a'] = "Team"
 		return context
 
 class TeamCreate(LoginRequiredMixin, CreateView):

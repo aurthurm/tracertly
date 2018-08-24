@@ -1,33 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'divisions/section_list.html' %}
 
-{% block content %}
-	<h3>{{ header }}</h3>
-	<p class="lead text-muted">{{ sub_header }}</p>
-	<hr>
-	<div class="card-columns">
-		{% for team in teams %}	
-			<!-- Board -->	
-			<div class="card">
-				<div class="card-body">
-				    <h5 class="card-title"> 
-				    	<a href="{% url 'divisions:team-detail' pk=team.pk %}" class="card-link text-center">{{ team.name }}</a>
-				    </h5>
-				  <hr>
-					  <div class="card-body">
-					    <p class="card-text">
-					    	{{ board.description }}
-					    	<span class="cardTextMore">
-					    		<a href="#">
-					    			<i class="far fa-edit"></i>
-					    		</a>
-					    	</span>
-					    </p>
-					</div>
-					<hr>		   
-				</div>
-			</div>
-			<!-- / Board -->
-		{% endfor %}
-	</div>
-	
+  
+{% block create_link %}
+<a class="float-right add-color" href="{% url 'divisions:team-add' %}">
+    Add Team	
+</a>
+{% endblock %}
+
+
+{% block section_or_team_link %}
+    <a href="{% url 'divisions:team-detail' team_id=section_or_team.pk %}" class="card-link text-center">{{ section_or_team.name }}</a>
 {% endblock %}

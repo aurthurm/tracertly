@@ -36,7 +36,7 @@ class UserProfileDetail(DetailView):
 	
 class UserProfileCreate(LoginRequiredMixin, CreateView):
 	model = UserProfile
-	fields = ['title', 'phone','teams', 'section', 'subsection', 'status', 'about']
+	fields = ['title', 'phone','teams', 'section', 'status', 'about']
 	template_name = 'users/create-profile.html'
 
 	def get_context_data(self, **kwargs):
@@ -48,7 +48,8 @@ class UserProfileCreate(LoginRequiredMixin, CreateView):
 		form.instance.user = self.request.user
 		return super().form_valid(form)
 
-class UserProfileUpdate(UpdateView):
+class UserProfileUpdate(LoginRequiredMixin, UpdateView):
 	model = UserProfile
-	fields = ['title', 'phone','teams', 'section', 'subsection', 'status', 'about']
+	fields = ['title', 'phone','teams', 'section', 'status', 'about']
 	template_name = 'create-form.html'
+	pk_url_kwarg = 'profile_id'

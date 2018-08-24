@@ -7,18 +7,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class SectionList(LoginRequiredMixin, ListView):
 	model = Section
-	context_object_name = 'sections'
+
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['header'] = "All Sections."
-		context['sub_header'] = "A list of all Sections."
+		context['header'] = "Sections"
+		context['sub_header'] = "Though Divided we work together towards a common goal #specialisation"
+		context['colorStyle'] = "section-color"
 		return context
 
 class SectionDetail(LoginRequiredMixin, DetailView):
 	model = Section
-	context_object_name = 'section'
+	pk_url_kwarg = 'section_id'
+	context_object_name = 'object_detail'
+
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
+		context['its_a'] = "Section"
 		return context
 
 

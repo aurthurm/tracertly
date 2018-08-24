@@ -44,6 +44,18 @@ a:hover {
     border-radius: 15%;
 }
 
+.text-bold {
+    font-weight: 700;
+}
+
+.text-tiny {
+    font-weight: 100;
+}
+
+.space-around {
+    padding: 5% !important;
+}
+
 /* 
     ::::::::::::::::::::::::: Colors
  */
@@ -83,6 +95,14 @@ a.link-transition:hover {
 
  .listing-color {
     background-color: #FBE8A6 !important;
+}
+
+.team-color {
+    background-color: #f59842 !important;
+}
+
+.section-color {
+    background-color: #84d69d !important;
 }
 
 .item-color {

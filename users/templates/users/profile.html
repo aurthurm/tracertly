@@ -4,9 +4,10 @@
 {% block content %}
 
  <div class="container">
-    <h5>Your Profile Information</h5>
+     <br>
+    <h3>Your Profile</h3>
     <hr>
-     <div class="row">
+     <div class="row bg-white space-around">
             <!-- profile info -->
          <div class="col-8">
             <div class="row">
@@ -14,32 +15,51 @@
                     Full Name:
                 </div>
                 <div class="col-10">
-                    {{ profile.user.first_name }} {{ profile.user.last_name }}
+                  {% if profile.user.first_name %}  
+                    {{ profile.user.first_name }} {{ profile.user.last_name }} 
+                  {% else %} 
+                  <p class="text-warning">
+                        No Name. To Update, Contact System Administrator
+                  </p>                    
+                   {% endif %}
                     <hr>
                 </div>
                 <div class="col-2 text-bold">
-                    Contact (Cell/Phone)
+                    Contact 
+                    <small class="text-muted text-tiny">(Cell/Phone)</small>
                 </div>
                 <div class="col-10">
-                    {{ profile.phone }}
+                    {% if profile.phone %}                       
+                     {{ profile.phone }}
+                    {% else %} 
+                    <p class="text-warning">
+                          No Contact iformation. Update <a href="{% url 'users:update-profile' user_id=profile.user.pk profile_id=profile.pk %}">here</a>
+                    </p>                    
+                     {% endif %}
                     <hr>
                 </div>
                 <div class="col-2 text-bold">
                     Title
                 </div>
                 <div class="col-10">
-                    {{ profile.title }}
+                        {% if profile.title %}                       
+                         {{ profile.title }}
+                        {% else %} 
+                        <p class="text-warning">
+                              No Title, Who are you?. Update <a href="{% url 'users:update-profile' user_id=profile.user.pk profile_id=profile.pk %}">here</a>
+                        </p>                    
+                         {% endif %}
                     <hr>
                 </div>
                 <div class="col-2 text-bold">
                     My Teams
                 </div>
                 <div class="col-10">
-                    {% if profile.teams|length > 0 %}
-                        {{ teams }}
-                    {% else %}
-                    You do not belong to any team yet 
-                    {% endif %}
+                    {% for team in profile.teams.all %}
+                        {{ team }},
+                    {% empty %}
+                        You do not belong to any team yet
+                    {% endfor %}
                     <hr>
                 </div>
                 <div class="col-2 text-bold">
@@ -47,13 +67,6 @@
                 </div>
                 <div class="col-10">
                     {{ profile.section }}
-                    <hr>
-                </div>
-                <div class="col-2 text-bold">
-                    SubSection
-                </div>
-                <div class="col-10">
-                    {{ profile.subsection }}
                     <hr>
                 </div>
                 <div class="col-2 text-bold">

@@ -1,21 +1,36 @@
 {% extends 'base.html' %}
 
-{% block content %}
-	<h3>{{ header }}</h3>
-	<p class="lead text-muted">{{ sub_header }}</p>
+{% block content %}	
+	<div class="row">
+			<div class="col-8">				
+				<h3>{{ header }}</h3>
+			</div>
+			<div class="col-3"> 
+				{% block create_link %}
+					<a class="float-right add-color" href="{% url 'divisions:section-add' %}">
+						Add Section	
+					</a>
+				{% endblock %}
+			</div>
+		</div>
+		<hr>
+	<hr>
+	<p class="lead text-muted bg-white">{{ sub_header }}</p>
 	<hr>
 	<div class="card-columns">
-		{% for section in sections %}	
+		{% for section_or_team in object_list %}	
 			<!-- Board -->	
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body {{ colorStyle }}">
 				    <h5 class="card-title"> 
-				    	<a href="{% url 'divisions:section-detail' pk=section.pk %}" class="card-link text-center">{{ section.name }}</a>
+						{% block section_or_team_link %}
+							<a href="{% url 'divisions:section-detail' section_id=section_or_team.pk %}" class="card-link text-center">{{ section_or_team.name }}</a>
+						{% endblock %}
 				    </h5>
 				  <hr>
-					  <div class="card-body">
+					  <div class="card-body bg-white">
 					    <p class="card-text">
-					    	{{ board.description }}
+					    	{{ section_or_team.description }}
 					    	<span class="cardTextMore">
 					    		<a href="#">
 					    			<i class="far fa-edit"></i>

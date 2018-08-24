@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from boards.models import Board
+from django.urls import reverse
 
 class Base(models.Model):
 	"""
@@ -37,4 +38,4 @@ class Section(Base):
 	boards = models.ManyToManyField('boards.Board', related_name='section_boards', blank =True)
 	
 	def get_absolute_url(self):
-		return reverse('divisions:section-detail', kwargs={'team_id': self.pk})
+		return reverse('divisions:section-detail', kwargs={'section_id': self.pk})

@@ -10,5 +10,6 @@ def home(request):
     	'heading': heading,
     	'boards': public_boards,
     	'boards_count': public_boards.count(),
+        'sub_header': "These boards are visible to everyone",
     }
     return render(request, 'home.html', context=context)
