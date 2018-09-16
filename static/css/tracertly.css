@@ -12,6 +12,10 @@
     ::::::::::::::::::::::::: Base Styles
  */
 
+ html {
+  position: relative;
+  min-height: 100%; }
+
  html,
  body {
     background-image: url('../img/bg/leather.png');
@@ -254,19 +258,13 @@ a.add-color {
 */
 
 #main-wrapper {
-    position: relative;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 100%
     margin-bottom: 100px;
 }
 
 footer.tracertly-footer {
-    position: relative;
-    left: 0;
-    right: 0;
+    position: absolute;
     bottom: 0;
+    width: 100%;
     padding: 10px;
     margin-top: 50px;
     height: auto;
