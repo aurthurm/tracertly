@@ -12,8 +12,8 @@
 		<hr>
 			<nav style="margin-bottom: 2rem;">
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-					<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-discusions" role="tab" aria-controls="nav-home" aria-selected="true">Discussions</a>
-					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-boards" role="tab" aria-controls="nav-profile" aria-selected="false">Our Boards</a>
+					<a class="nav-item nav-link disabled" id="nav-home-tab" data-toggle="tab" href="#nav-discusions" role="tab" aria-controls="nav-home" aria-selected="true">Discussions</a>
+					<a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-boards" role="tab" aria-controls="nav-profile" aria-selected="false">Our Boards</a>
 					{% if not is_a_Team %}
 					<!-- A team has no teams -->
 					<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-profile" aria-selected="false">Our Teams</a>
@@ -22,7 +22,7 @@
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
 				<!-- Discusions -->				
-				<div class="tab-pane fade show active" id="nav-discusions" role="tabpanel" aria-labelledby="nav-home-tab">
+				<div class="tab-pane fade show disbled" id="nav-discusions" role="tabpanel" aria-labelledby="nav-home-tab">
 					<div class="card-columns">
 						{% for object in object_detail.discusions.all %}
 							{% include './includes/board.html' %}	
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<!-- Boards -->					
-				<div class="tab-pane fade show" id="nav-boards" role="tabpanel" aria-labelledby="nav-boards-tab">
+				<div class="tab-pane fade show  active" id="nav-boards" role="tabpanel" aria-labelledby="nav-boards-tab">
 					<div class="card-columns">	
 						<!-- get boards belonging to this Section using .boards.all direct manager -->
 						{% if not is_a_Team %}						
