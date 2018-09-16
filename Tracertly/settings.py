@@ -25,7 +25,7 @@ SECRET_KEY = '+4-i_88lijfi0nw$5$a9m8aqea2xa@5h*#=ipm!hu!o97hcwxd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.5.5.121','0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.5.5.121','0.0.0.0', 'amusely.com']
 
 
 # Application definition

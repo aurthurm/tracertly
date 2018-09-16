@@ -263,12 +263,13 @@ a.add-color {
 }
 
 footer.tracertly-footer {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     bottom: 0;
     padding: 10px;
-    height: 50px;
+    margin-top: 50px;
+    height: auto;
     color: #fff;
     background: #000;
     width: 100% !important;
