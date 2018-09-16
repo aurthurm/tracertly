@@ -9,5 +9,7 @@
 
 
 {% block section_or_team_link %}
-    <a href="{% url 'divisions:team-detail' team_id=section_or_team.pk %}" class="card-link text-center">{{ section_or_team.name }}</a>
+    <a href="{% url 'divisions:team-detail' team_id=section_or_team.pk %}" class="card-link text-center text-black {
+        color: #000;
+    }">{{ section_or_team.name }}</a>
 {% endblock %}

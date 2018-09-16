@@ -24,6 +24,7 @@ class Team(Base):
 		A Team can be thought of as a group:
 	"""
 	members = models.ManyToManyField('auth.User', related_name='team_members', blank =True)
+	boards = models.ManyToManyField('boards.Board', related_name='team_boards', blank =True)
 	
 	def get_absolute_url(self):
 		return reverse('divisions:team-detail', kwargs={'team_id': self.pk})

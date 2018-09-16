@@ -58,6 +58,7 @@ class BoardCreate(LoginRequiredMixin, CreateView):
 
 class BoardUpdate(UpdateView):
 	model = Board
+	pk_url_kwarg = 'board_id'
 	fields = ['name', 'description','section', 'public', 'archived']
 	template_name = 'create-form.html'
 

@@ -22,11 +22,12 @@ class TeamDetail(LoginRequiredMixin, DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['its_a'] = "Team"
+		context['is_a_Team'] = True
 		return context
 
 class TeamCreate(LoginRequiredMixin, CreateView):
 	model = Team
-	fields = ['name', 'description','members']
+	fields = ['name', 'description','members', 'boards']
 	template_name = 'create-form.html'
 
 	def get_context_data(self, **kwargs):
@@ -40,7 +41,8 @@ class TeamCreate(LoginRequiredMixin, CreateView):
 
 class TeamUpdate(LoginRequiredMixin, UpdateView):
 	model = Team
-	fields = ['name', 'description','members']
+	pk_url_kwarg = 'team_id'
+	fields = ['name', 'description','members', 'boards']
 	template_name = 'create-form.html'
 
 class TeamDelete(LoginRequiredMixin, DeleteView):

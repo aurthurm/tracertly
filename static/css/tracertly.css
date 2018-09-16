@@ -68,6 +68,10 @@ a.dropdown-item:hover {
     background-color: #303C6C !important;
 } 
 
+.text-black {
+    color: #000;
+}
+
 .bg-dark {
     padding: 0 1rem;
 }
@@ -150,6 +154,10 @@ a.add-color {
     padding: 1% 2%;
 }
 
+.text-logout:hover {
+    color: red !important;
+}
+
 
  /* 
     ::::::::::::::::::::::::: Main Navigation
@@ -163,6 +171,7 @@ a.add-color {
   /* 
     ::::::::::::::::::::::::: Off Canvas Menu
  */
+
 .sidenav {
     height: 100%; 
     width: 0;
@@ -238,4 +247,29 @@ a.add-color {
 
 .middle-page {
     margin-top: 15%;
+}
+
+/* 
+    ::::::::::::::::::::::::: Footer > Main
+*/
+
+#main-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%
+    margin-bottom: 100px;
+}
+
+footer.tracertly-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    height: 50px;
+    color: #fff;
+    background: #000;
+    width: 100% !important;
 }

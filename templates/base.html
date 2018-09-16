@@ -13,47 +13,45 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/tracertly.css' %}">
 </head>
 <body>
+    <div id="main-wrapper">
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#" onclick="openNav()">Tracertly</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Disabled</a>
-          </li>
-        </ul>
-       <ul class=" navbar-nav my-2 my-lg-0">
-           {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @{{ user.username }} 
-                    </a>
-                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                        {% if not user.user_profile %}
-                            <a class="dropdown-item link-transition" href="{% url 'users:create-profile' %}">Create Profile</a>
-                        {% else %}
-                            <a class="dropdown-item link-transition" href="{% url 'users:profile-detail' user_id=user.pk profile_id=user.user_profile.pk %}">Profile</a>
-                        {% endif %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-logout" href="{% url 'logout' %}">
-                            Sign Out
-                            <span class="fa fa-lock" aria-hidden="true"></span> 
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="#" onclick="openNav()">Tracertly</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+            </ul>
+           <ul class=" navbar-nav my-2 my-lg-0">
+               {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @{{ user.username }} 
                         </a>
-                    </div>
-                </li>
-            {% else %}
-                <li class="user-names nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="fa fa-unlock-alt" aria-hidden="true"></span> Log In</a></li>
-            {% endif %}
-       </ul>
-      </div>
-    </nav>
-    
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            {% if not user.user_profile %}
+                                <a class="dropdown-item link-transition" href="{% url 'users:create-profile' %}">Create Profile</a>
+                            {% else %}
+                                <a class="dropdown-item link-transition" href="{% url 'users:profile-detail' user_id=user.pk profile_id=user.user_profile.pk %}">Profile</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-logout" href="{% url 'logout' %}">
+                                Sign Out
+                                <span class="fa fa-lock" aria-hidden="true"></span> 
+                            </a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="user-names nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="fa fa-unlock-alt" aria-hidden="true"></span> Log In</a></li>
+                {% endif %}
+           </ul>
+          </div>
+        </nav>
+        
 
         <div class="wrapper">
             <nav id="sideBarNav" class="sidenav">
@@ -100,9 +98,13 @@
                 {% endblock %}
 
             </main>
+
         </div>
-
-
+        
+    </div>
+    <footer class="tracertly-footer  text-center">
+        Tracertly &copy 2018
+    </footer>
 
     <!-- jQuery -->
     <script src="{% static 'jquery/jquery.min.js' %}"></script>

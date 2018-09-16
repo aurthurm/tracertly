@@ -68,14 +68,18 @@
 					</div>
 				</div>
 			</div>
+		{% empty %}
+			<!-- <p class="text-danger text-center">
+				You have no Listings yet
+			</p> -->
 		{% endfor %}
 
 		<div class="card-body">
-			<p class="card-text add-color">
+			<p class="card-text pl-1 add-color">
 				<a hhref="{% url 'boards:listing-add' board_id=board_detail.pk %}" data-toggle="modal" data-target="#addListing">Add Listing</a>
 			</p>
 		</div>
-
+	</div>
 
 	<!-- Listing Modal -->
 	<div class="modal fade top-spacer" id="addListing" tabindex="-1" role="dialog" aria-labelledby="addListing" aria-hidden="true">
