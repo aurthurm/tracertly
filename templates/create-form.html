@@ -10,6 +10,7 @@
             <br>
             <form method="POST" class="form-horizontal post-form" id="editBase">
                 {% csrf_token %}
+                {{ form.media }}
                 <p class="availableMessage" hidden="hidden"></p>
                 {% for field in form %}
                     <div class="form-group">

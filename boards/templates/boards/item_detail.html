@@ -20,7 +20,7 @@
 								<h6>Description: <a href="{% url 'boards:item-update' board_id=item_detail.Listing.board.pk listing_id=item_detail.Listing.pk  item_id=item_detail.pk %}"><i class="fas fa-pencil-alt faSize-bg"></i></a></h6>
 								<hr>
 								<div class="card-subtitle">
-									{{ item_detail.description }}
+									{{ item_detail.description|safe }}
 								</div>
 								<hr>
 							</div>
@@ -69,6 +69,7 @@
 								<hr>
 								<form id="itemCommentForm" method='POST' action='{% url 'boards:comment-add' item_id=item_detail.pk %}' data-url='{{ commentCreateURL }}'>
 									{% csrf_token %}
+									{{ form.media }}
 									<div class="row">
 										<label for="comment" hidden>Comment</label>
 										<div class="col-10">

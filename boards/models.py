@@ -2,6 +2,7 @@ from django.db import models
 from divisions.models import *
 from django.utils import timezone
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 class Base(models.Model):
 	"""
@@ -43,6 +44,7 @@ class Item(Base):
 	"""
 		An Item can be seen as Tasks under each Listing
 	"""
+	description = RichTextField()
 	Listing = models.ForeignKey(Listing, related_name ="item_listings", on_delete = models.PROTECT)
 	assignee = models.ForeignKey('auth.User', on_delete = models.PROTECT, related_name="item_assignee", blank=True, null=True)
 		
@@ -54,7 +56,7 @@ class Comment(models.Model):
 		Users (Members) can get to comment on Items: A conversation
 	"""
 	item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_comments')
-	comment = models.TextField()
+	comment = RichTextField()
 	comment_date = models.DateTimeField(default=timezone.now)
 	comment_by = models.ForeignKey('auth.User', on_delete = models.PROTECT)
 	

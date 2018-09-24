@@ -8,6 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('accounts/login/', viewz.login, name='login'),
     path('accounts/logout/', viewz.logout, name='logout', kwargs={'next_page': '/'}),

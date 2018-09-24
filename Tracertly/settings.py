@@ -38,6 +38,7 @@ TRACERTLY_APPS = [  # Local Apps that are developed withing Tracertly
 
 EXTENSION_APPS = [# Apps that are installed to add functionality to Tracerly :> Packages
     # 'rest_framework',
+    'ckeditor',
 ]
 
 INSTALLED_APPS = [
@@ -144,3 +145,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/static/',
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+SITE_ID = 1
+CKEDITOR_UPLOAD_PATH = "uploads/"
