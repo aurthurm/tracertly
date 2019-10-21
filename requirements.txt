@@ -61,7 +61,7 @@ requests==2.19.1
 six==1.11.0
 style==1.1.0
 tablib==0.12.1
-Twisted==18.7.0
+Twisted==19.7.0
 txaio==18.7.1
 unicodecsv==0.14.1
 Unidecode==0.4.21
