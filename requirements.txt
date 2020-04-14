@@ -67,7 +67,7 @@ unicodecsv==0.14.1
 Unidecode==0.4.21
 update==0.0.1
 urllib3==1.23
-wagtail==2.0.2
+wagtail==2.7.2
 webencodings==0.5.1
 websocket==0.2.1
 websocket-client==0.51.0
