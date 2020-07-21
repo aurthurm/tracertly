@@ -16,9 +16,7 @@ from boards.models import (
 
 from divisions.models import (
     Team,
-    Section,
-    SubTeam,
-    SubSection,
+    Section
 )
 
 from users.models import UserProfile

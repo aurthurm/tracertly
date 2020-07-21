@@ -10,8 +10,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/login/', viewz.login, name='login'),
-    path('accounts/logout/', viewz.logout, name='logout', kwargs={'next_page': '/'}),
+    # path('accounts/login/', viewz.login, name='login'),
+    path('accounts/login/', viewz.LoginView.as_view(), name="login"),
+    path('accounts/logout/', viewz.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}),
     # path('api/', include(router.urls)),
     path('', views.home, name='home'),
     path('users/', include('users.urls')),
